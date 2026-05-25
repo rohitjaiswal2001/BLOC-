@@ -10,24 +10,37 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+      appBar: AppBar(title: Text(title)),
       body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            const Text('You have pushed the button this many times:'),
-            // BlocBuilder listens to changes in CounterBloc and rebuilds only this part of the UI
-            BlocBuilder<CounterBloc, CounterState>(
-              builder: (context, state) {
-                return Text(
-                  '${state.count}',
-                  style: Theme.of(context).textTheme.headlineMedium,
-                );
-              },
-            ),
-          ],
+        // BlocListener listens to state changes but DOES NOT rebuild the UI.
+        // It is used for "side effects" like showing SnackBars, Dialogs, or navigating.
+        child: BlocListener<CounterBloc, CounterState>(
+          listener: (context, state) {
+            if (state.count == 5) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Wow! You reached 5!')),
+              );
+            } else if (state.count == -5) {
+              ScaffoldMessenger.of(context).showSnackBar(
+                const SnackBar(content: Text('Going negative! You reached -5!')),
+              );
+            }
+          },
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: <Widget>[
+              const Text('You have pushed the button this many times:'),
+              // BlocBuilder listens to changes in CounterBloc and rebuilds only this part of the UI
+              BlocBuilder<CounterBloc, CounterState>(
+                builder: (context, state) {
+                  return Text(
+                    '${state.count}',
+                    style: Theme.of(context).textTheme.headlineMedium,
+                  );
+                },
+              ),
+            ],
+          ),
         ),
       ),
       floatingActionButton: Column(
