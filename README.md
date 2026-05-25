@@ -41,3 +41,4 @@ You can switch to any step in your terminal by running:
     *   Handling asynchronous operations using `async / await` inside the BLoC event listener.
     *   Emitting different timeline states: `DataInitial`, `DataLoading`, `DataLoaded`, and `DataError`.
     *   Using an `if/else if` block inside a `BlocBuilder` to show completely different UI widgets (like a spinning loading circle) depending on the current state.
+# BLOC-
