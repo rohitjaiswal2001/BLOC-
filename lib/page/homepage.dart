@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/counter/counter_bloc.dart';
+import '../bloc/auth/auth_bloc.dart';
 
 class MyHomePage extends StatelessWidget {
   final String title;
@@ -10,8 +11,31 @@ class MyHomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(title)),
+      appBar: AppBar(
+        title: Text(title),
+        actions: [
+          BlocBuilder<AuthBloc, AuthState>(
+            builder: (context, state) {
+              if (state is Authenticated) {
+                return IconButton(
+                  icon: const Icon(Icons.logout, color: Colors.red),
+                  onPressed: () {
+                    context.read<AuthBloc>().add(LogoutEvent());
+                  },
+                );
+              }
+              return IconButton(
+                icon: const Icon(Icons.login, color: Colors.green),
+                onPressed: () {
+                  context.read<AuthBloc>().add(LoginEvent());
+                },
+              );
+            },
+          ),
+        ],
+      ),
       body: Center(
+
         // BlocListener listens to state changes but DOES NOT rebuild the UI.
         // It is used for "side effects" like showing SnackBars, Dialogs, or navigating.
         child: BlocListener<CounterBloc, CounterState>(

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/counter/counter_bloc.dart';
+import 'bloc/auth/auth_bloc.dart';
 import 'page/homepage.dart';
 
 void main() {
@@ -12,9 +13,17 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // BlocProvider provides the CounterBloc to the widget tree
-    return BlocProvider(
-      create: (context) => CounterBloc(),
+    // MultiBlocProvider allows us to provide multiple Blocs to the widget tree
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<AuthBloc>(
+          create: (context) => AuthBloc(),
+        ),
+        // CounterBloc needs AuthBloc as a dependency, so we read it from the context
+        BlocProvider<CounterBloc>(
+          create: (context) => CounterBloc(authBloc: context.read<AuthBloc>()),
+        ),
+      ],
       child: MaterialApp(
         title: 'Flutter BLoC Demo',
         theme: ThemeData(

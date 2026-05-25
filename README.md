@@ -47,3 +47,11 @@ You can switch to any step in your terminal by running:
 *   **What we did:** Wrapped our main UI in `homepage.dart` with a `BlocListener` to show a popup `SnackBar` when the counter reaches 5 or -5.
 *   **Concepts Learned:**
     *   **BlocListener**: Unlike `BlocBuilder`, this widget **does not** redraw the UI. It listens to the state and is only used for "side effects" that should happen once per state change, like showing a dialog, navigating to a new screen, or displaying a SnackBar.
+
+### Step 6: BLoC to BLoC Communication
+**Branch:** `step6-bloc-communication` (Current Branch)
+*   **What we did:** Created an `AuthBloc` (for simulating login/logout) and made the `CounterBloc` automatically listen to it so the counter resets to 0 whenever the user logs out.
+*   **Concepts Learned:**
+    *   **StreamSubscription**: We passed the `AuthBloc` into the `CounterBloc`'s constructor and used `.stream.listen()` to monitor its state changes.
+    *   **Inter-Bloc Communication**: When `AuthBloc` emits an `Unauthenticated` state, the `CounterBloc` immediately intercepts it and dispatches a `ResetEvent` to itself.
+    *   **MultiBlocProvider**: Updated `main.dart` to provide multiple BLoCs to the application tree simultaneously.
