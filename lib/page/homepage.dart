@@ -22,7 +22,9 @@ class MyHomePage extends StatelessWidget {
               );
             } else if (state.count == -5) {
               ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Going negative! You reached -5!')),
+                const SnackBar(
+                  content: Text('Going negative! You reached -5!'),
+                ),
               );
             }
           },
