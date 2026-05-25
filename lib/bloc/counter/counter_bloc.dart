@@ -15,10 +15,5 @@ class CounterBloc extends Bloc<CounterEvent, CounterState> {
     on<DecrementEvent>((event, emit) {
       emit(CounterState(count: state.count - 1));
     });
-
-    // When ResetEvent is received, reset the counter to 0
-    on<ResetEvent>((event, emit) {
-      emit(CounterState(count: 0));
-    });
   }
 }

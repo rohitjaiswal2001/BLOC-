@@ -50,15 +50,6 @@ class MyHomePage extends StatelessWidget {
             tooltip: 'Decrement',
             child: const Icon(Icons.remove),
           ),
-          const SizedBox(height: 10),
-          FloatingActionButton(
-            onPressed: () {
-              // Add ResetEvent to the Bloc
-              context.read<CounterBloc>().add(ResetEvent());
-            },
-            tooltip: 'Reset',
-            child: const Icon(Icons.refresh),
-          ),
         ],
       ),
     );
