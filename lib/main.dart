@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'bloc/counter/counter_bloc.dart';
 import 'bloc/auth/auth_bloc.dart';
+import 'bloc/form/form_bloc.dart';
 import 'page/homepage.dart';
 
 void main() {
@@ -19,6 +20,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<AuthBloc>(
           create: (context) => AuthBloc(),
         ),
+        BlocProvider<FormBloc>(
+          create: (context) => FormBloc(),
+        ),
+
         // CounterBloc needs AuthBloc as a dependency, so we read it from the context
         BlocProvider<CounterBloc>(
           create: (context) => CounterBloc(authBloc: context.read<AuthBloc>()),

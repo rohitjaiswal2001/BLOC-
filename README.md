@@ -55,3 +55,12 @@ You can switch to any step in your terminal by running:
     *   **StreamSubscription**: We passed the `AuthBloc` into the `CounterBloc`'s constructor and used `.stream.listen()` to monitor its state changes.
     *   **Inter-Bloc Communication**: When `AuthBloc` emits an `Unauthenticated` state, the `CounterBloc` immediately intercepts it and dispatches a `ResetEvent` to itself.
     *   **MultiBlocProvider**: Updated `main.dart` to provide multiple BLoCs to the application tree simultaneously.
+
+### Step 7: Form Validation with BLoC
+**Branch:** `step7-form-validation` (Current Branch)
+*   **What we did:** Built a complete Login Form page driven entirely by a `FormBloc`. The form validates email and password, shows a loading spinner while submitting, and on success uses inter-BLoC communication to update `AuthBloc`.
+*   **Concepts Learned:**
+    *   **`copyWith` pattern**: Instead of creating a whole new state class for each change, our `LoginFormState` has a `copyWith()` method. This lets us update only the fields we care about and keep everything else the same — very efficient!
+    *   **`buildWhen`**: A powerful optimisation on `BlocBuilder`. By adding `buildWhen: (previous, current) => previous.email != current.email`, we tell Flutter to ONLY redraw the Email field when the email changes. The password field won't trigger an email field redraw and vice versa.
+    *   **Naming Conflicts**: Flutter itself has a class called `FormState`. We learned to rename our own class to `LoginFormState` to avoid ambiguous import errors.
+    *   **`BlocListener` + `BlocBuilder` together**: The form uses a `BlocListener` for side effects (showing SnackBars, navigating) wrapped around `BlocBuilder` widgets for the UI parts.
