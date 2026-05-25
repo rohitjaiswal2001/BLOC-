@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../bloc/counter/counter_bloc.dart';
-import 'data_page.dart';
 
 class MyHomePage extends StatelessWidget {
   final String title;
@@ -13,16 +12,6 @@ class MyHomePage extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(title),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.arrow_forward),
-            onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const DataPage()),
-              );
-            },
-          )
-        ],
       ),
       body: Center(
         child: Column(
