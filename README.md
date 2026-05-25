@@ -8,7 +8,7 @@ The project has been initialized as a Git repository, and every step of the lear
 You can switch to any step in your terminal by running:
 `git checkout <branch_name>`
 
-*(To come back to the final state, run `git checkout step4-async-data`)*
+*(To come back to the final state, run `git checkout step5-bloc-listener`)*
 
 ---
 
@@ -35,10 +35,17 @@ You can switch to any step in your terminal by running:
 *   **Concepts Learned:** Dart compares objects by memory location, not by value. We learned how to `extend Equatable` on our States and Events to prevent the `BlocBuilder` from uselessly rebuilding the UI when the state hasn't actually changed.
 
 ### Step 4: Async Data Fetching
-**Branch:** `step4-async-data` (Current Branch)
+**Branch:** `step4-async-data`
 *   **What we did:** Created a brand new BLoC (`DataBloc`) to simulate fetching data from the internet.
 *   **Concepts Learned:** 
     *   Handling asynchronous operations using `async / await` inside the BLoC event listener.
     *   Emitting different timeline states: `DataInitial`, `DataLoading`, `DataLoaded`, and `DataError`.
     *   Using an `if/else if` block inside a `BlocBuilder` to show completely different UI widgets (like a spinning loading circle) depending on the current state.
+
+### Step 5: Side Effects with BlocListener
+**Branch:** `step5-bloc-listener` (Current Branch)
+*   **What we did:** Wrapped our main UI in `homepage.dart` with a `BlocListener` to show a popup `SnackBar` when the counter reaches 5 or -5.
+*   **Concepts Learned:**
+    *   **BlocListener**: Unlike `BlocBuilder`, this widget **does not** redraw the UI. It listens to the state and is only used for "side effects" that should happen once per state change, like showing a dialog, navigating to a new screen, or displaying a SnackBar.
+
 # BLOC-
