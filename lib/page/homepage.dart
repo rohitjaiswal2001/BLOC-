@@ -17,11 +17,11 @@ class MyHomePage extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.arrow_forward),
             onPressed: () {
-              Navigator.of(context).push(
-                MaterialPageRoute(builder: (context) => const DataPage()),
-              );
+              Navigator.of(
+                context,
+              ).push(MaterialPageRoute(builder: (context) => const DataPage()));
             },
-          )
+          ),
         ],
       ),
       body: Center(
