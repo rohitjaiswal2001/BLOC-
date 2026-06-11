@@ -8,16 +8,16 @@ class LoginPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return Scaffold(  
       appBar: AppBar(title: const Text('Login Form')),
       body: BlocListener<FormBloc, LoginFormState>(
         listener: (context, state) {
           if (state.status == FormStatus.success) {
             // Log the user in via AuthBloc (BLoC-to-BLoC communication!)
             context.read<AuthBloc>().add(LoginEvent());
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text('Login Successful!')),
-            );
+            ScaffoldMessenger.of(
+              context,
+            ).showSnackBar(const SnackBar(content: Text('Login Successful!')));
             Navigator.of(context).pop();
           } else if (state.status == FormStatus.failure) {
             ScaffoldMessenger.of(context).showSnackBar(
@@ -35,7 +35,8 @@ class LoginPage extends StatelessWidget {
               // Email Field
               // buildWhen: Only rebuild this widget when the email field changes
               BlocBuilder<FormBloc, LoginFormState>(
-                buildWhen: (previous, current) => previous.email != current.email,
+                buildWhen: (previous, current) =>
+                    previous.email != current.email,
                 builder: (context, state) {
                   return TextField(
                     onChanged: (value) =>

@@ -10,9 +10,7 @@ class DataPage extends StatelessWidget {
     return BlocProvider(
       create: (context) => DataBloc(),
       child: Scaffold(
-        appBar: AppBar(
-          title: const Text('Async Data Fetching'),
-        ),
+        appBar: AppBar(title: const Text('Async Data Fetching')),
         body: Center(
           child: BlocBuilder<DataBloc, DataState>(
             builder: (context, state) {

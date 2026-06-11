@@ -17,18 +17,22 @@ class FormBloc extends Bloc<FormEvent, LoginFormState> {
     on<FormSubmitted>((event, emit) async {
       // Basic validation
       if (state.email.isEmpty || !state.email.contains('@')) {
-        emit(state.copyWith(
-          status: FormStatus.failure,
-          errorMessage: 'Please enter a valid email address.',
-        ));
+        emit(
+          state.copyWith(
+            status: FormStatus.failure,
+            errorMessage: 'Please enter a valid email address.',
+          ),
+        );
         return;
       }
 
       if (state.password.length < 6) {
-        emit(state.copyWith(
-          status: FormStatus.failure,
-          errorMessage: 'Password must be at least 6 characters.',
-        ));
+        emit(
+          state.copyWith(
+            status: FormStatus.failure,
+            errorMessage: 'Password must be at least 6 characters.',
+          ),
+        );
         return;
       }
 
